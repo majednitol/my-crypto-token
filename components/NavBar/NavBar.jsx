@@ -6,7 +6,7 @@ import { ERC20ICOContext } from '@/context/FunToken';
 // import funToken from '../../assets/funtoken';
 
 const NavBar = () => {
-    const { checkConnection, ERC20FunToken, transferToken, tokenHolderData, account, accountBalance, userId, NoOfToken, TokenName, TokenStandrard, TokenSymbol, TokenOwner, TokenOwnerBal, completed } = useContext(ERC20ICOContext)
+    const { connectWallect, ERC20FunToken, transferToken, tokenHolderData, account, accountBalance, userId, NoOfToken, TokenName, TokenStandrard, TokenSymbol, TokenOwner, TokenOwnerBal, completed } = useContext(ERC20ICOContext)
     return (
         // <Image src="/assets/loder.gif" height={300} width={200} alt='kkk' />
         <div className={Style.navBar}>
@@ -18,7 +18,11 @@ const NavBar = () => {
             <div className={Style.navBar_box}>
                 <div className={Style.navbar_box_left}>
                     <h1>Funny Token</h1>
+                    <div>
+                        <button className={Style.btn} onClick={() => { connectWallect() }}>Connect Wallet</button>
+                    </div>
                 </div>
+
                 <div className={Style.navBar_box_right}>
                     <p>
                         Token Balance  &nbsp; &nbsp;<span>

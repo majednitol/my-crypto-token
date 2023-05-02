@@ -37,7 +37,7 @@ export const ERC20Provider = ({ children }) => {
   useEffect(() => {
     const loadProvider = async () => {
       if (window.ethereum) {
-        const provider = new ethers.providers.JsonRpcProvider(`https://sepolia.infura.io/v3/1ee37c487cf040c5a16983234a7eb9cd`);
+        const provider = new ethers.providers.JsonRpcProvider(`https://eth-sepolia.g.alchemy.com/v2/MhmkaAHDQ4TU4WKCFUUzD9sztrO_7fZM`);
         window.ethereum.on("chainChanged", () => {
           window.location.reload()
         })
@@ -56,7 +56,25 @@ export const ERC20Provider = ({ children }) => {
     }
     loadProvider();
   }, []);
-  
+  const connectWallect = async () => {
+    if (window.ethereum) {
+      const provider = new ethers.providers.JsonRpcProvider(`https://eth-sepolia.g.alchemy.com/v2/MhmkaAHDQ4TU4WKCFUUzD9sztrO_7fZM`);
+      window.ethereum.on("chainChanged", () => {
+        window.location.reload()
+      })
+      window.ethereum.on("accountsChanged", () => {
+        window.location.reload()
+      })
+      const accounts = await window.ethereum.request({ method: "eth_accounts" });
+      setAccount(accounts)
+      const signer = provider.getSigner()
+      const contract = new ethers.Contract(funTokenAddress, funTokenABI, provider)
+      setContractData(contract)
+      setProviders(provider)
+    } else {
+      console.error("Metamask is not installed");
+    }
+  }
  useEffect(() => {
    
    const ERC20FunToken = async () => {
@@ -138,24 +156,9 @@ export const ERC20Provider = ({ children }) => {
     } else {
       console.error("Metamask is not installed");
     }
-        
-       
-        
-       
-      
-    
-    
-
-      
-      
-    
   }
-
-  
-  
-
-  return (
-      <ERC20ICOContext.Provider value={{providers, contractData, transferToken,account,accountBalance,userId,NoOfToken,TokenName,TokenStandrard,TokenSymbol,TokenOwner,TokenOwnerBal,completed,holderArray}}>
+return (
+      <ERC20ICOContext.Provider value={{providers,connectWallect, contractData, transferToken,account,accountBalance,userId,NoOfToken,TokenName,TokenStandrard,TokenSymbol,TokenOwner,TokenOwnerBal,completed,holderArray}}>
           {children}
     </ERC20ICOContext.Provider>
   )
