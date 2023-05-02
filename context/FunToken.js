@@ -97,12 +97,12 @@ export const ERC20Provider = ({ children }) => {
       // console.log("TokenOwnerBal", TokenOwnerBal);
       const allTokenHolder = await contractData.balanceOf(account[0])
       setAccountBalance(allTokenHolder.toNumber())
-      console.log("allTokenHolder",allTokenHolder.toNumber());
+      // console.log("allTokenHolder",allTokenHolder.toNumber());
       const totalHolder = await contractData.userId()
       setUserId(totalHolder.toNumber())
-      console.log("userId", userId);
+      // console.log("userId", userId);
 
-      console.log("owner",TokenOwner);
+      // console.log("owner",TokenOwner);
      
     } catch (error) {
       
@@ -120,7 +120,7 @@ export const ERC20Provider = ({ children }) => {
     } catch (error) {
       console.log('something went wrong in getting data', error);
      }
-     console.log("jjjj",holderArray);
+    //  console.log("jjjj",holderArray);
   };
   
       
